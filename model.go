@@ -108,6 +108,12 @@ func _newModel(db *DB, dest any, scan bool) (Model, error) {
 	}
 
 	v = v.Elem()
+
+	// if dest is a reflect.Value, use the underlying value
+	if vv, ok := v.Interface().(reflect.Value); ok {
+		v = vv
+	}
+
 	typ := v.Type()
 
 	switch typ {
