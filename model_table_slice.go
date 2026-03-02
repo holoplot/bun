@@ -60,7 +60,7 @@ func (m *sliceTableModel) ScanRows(ctx context.Context, rows *sql.Rows) (int, er
 	m.columns = columns
 	dest := makeDest(m, len(columns))
 
-	if m.slice.IsValid() && m.slice.Len() > 0 {
+	if m.slice.IsValid() && m.slice.CanSet() && m.slice.Len() > 0 {
 		m.slice.Set(m.slice.Slice(0, 0))
 	}
 
